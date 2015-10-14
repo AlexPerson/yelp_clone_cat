@@ -14,6 +14,7 @@ Week seven challenge at Makers Academy. This week's project is a clone of Yelp. 
 1. Ruby - version
 2. RSpec and Capybara for testing
 3. Rails
+4. PostgreSQL
 4. Database creation/initialization?
 
 ## Approach:
