@@ -7,4 +7,11 @@ FactoryGirl.define do
    password              'oranges!'
    password_confirmation 'oranges!'
  end
+
+  factory :foreign_user, parent: :user do
+   email                 'bob@example.com'
+   password              'oranges!'
+   password_confirmation 'oranges!'
+ end
+
 end

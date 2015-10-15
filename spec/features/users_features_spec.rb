@@ -36,3 +36,30 @@ end
     end
   end
 end
+
+feature 'Users are restricted in what they can do' do
+
+    let(:restaurant)      { Restaurant.create    }
+    let(:user)            { User.create }
+
+    context 'users can only delete or edit restaurants they\'ve created' do
+
+      it 'a restaurant belongs to a user' do
+        expect(restaurant).to belong_to(:user)
+      end
+
+      xit 'restaurants created by a user other than the one logged in cannot be deleted' do
+        user = build :user
+        sign_up(user)
+        restaurant = build :restaurant
+        add_restaurant(restaurant)
+        click_on 'Sign out'
+        foreign_user = build :user
+        sign_up(foreign_user)
+        delete_restaurant(restaurant)
+        expect(page).to have_content(restaurant.name)
+      end
+
+  end
+
+end
