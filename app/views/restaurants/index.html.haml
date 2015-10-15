@@ -23,5 +23,6 @@
     - else
       %p No reviews
 
+- if user_signed_in?
 
-= link_to "Add a restaurant", new_restaurant_path
+  = link_to "Add a restaurant", new_restaurant_path

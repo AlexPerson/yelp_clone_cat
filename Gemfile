@@ -56,4 +56,5 @@ group :test do
   gem 'capybara'
   gem 'rspec-collection_matchers'
   gem 'shoulda'
+  gem 'factory_girl_rails'
 end

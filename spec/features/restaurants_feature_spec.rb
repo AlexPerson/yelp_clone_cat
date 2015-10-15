@@ -3,6 +3,8 @@ require 'rails_helper'
 feature 'restaurants' do
   context 'no restaurants haven been added' do
     scenario 'should display a prompt to add a restaurant' do
+      user = build :user
+      sign_up(user)
       visit '/restaurants'
       expect(page).to have_content 'No restaurants yet'
       expect(page).to have_link 'Add a restaurant'
@@ -23,6 +25,8 @@ feature 'restaurants' do
 
   context 'creating restaurants' do
     scenario 'prompts user to fill out a form, then displays the new restaurant' do
+      user = build :user
+      sign_up(user)
       visit '/restaurants'
       click_link 'Add a restaurant'
       fill_in 'Name', with: 'KFC'
@@ -33,6 +37,8 @@ feature 'restaurants' do
 
     context 'an invalid restaurant' do
       it 'does not let you submit a name that is too short' do
+        user = build :user
+        sign_up(user)
         visit '/restaurants'
         click_link 'Add a restaurant'
         fill_in 'Name', with: 'kf'
@@ -78,6 +84,25 @@ feature 'restaurants' do
     end
   end
 
+  context 'can only be created' do
+    scenario 'by logged in users' do
+      visit '/restaurants'
+      expect(page).not_to have_content 'Add a restaurant'
+    end
+  end
 
+  def sign_up(user)
+     visit '/users/sign_up'
+     fill_in :user_email, with: user.email
+     fill_in :user_password, with: user.password
+     fill_in :user_password_confirmation, with: user.password_confirmation
+     click_button "Sign up"
+  end
 
+  def sign_in(user)
+     visit '/users/sign_in'
+     fill_in :user_email, with: user.email
+     fill_in :user_password, with: user.password
+     click_button "Sign in"
+  end
 end
